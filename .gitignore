@@ -1,0 +1,22 @@
+# Tool output
+/out/
+/logs/
+/reports/
+*.log
+
+# Test and analysis results
+TestResults/
+testResults.xml
+coverage.xml
+
+# Editors / OS
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Claude Code local files
+.claude/settings.local.json
+CLAUDE.local.md
