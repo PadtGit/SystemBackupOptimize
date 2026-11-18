@@ -15,7 +15,7 @@ Planning only. Stages 1 and 2 of the brief are done. Next: Stage 3 (feature inve
 - Windows 11 and Windows 10 22H2 client; Home, Pro, Enterprise (detect, never assume Pro features). Windows Server is out of scope.
 - Veeam Agent standalone and VBR-managed. Free and Workstation editions have no script hook; the verdict there is advisory.
 - Workgroup, on-prem AD, Entra ID joined, hybrid joined.
-- Windows PowerShell 5.1 must work. PowerShell 7.x optional. No syntax or cmdlets that need 7.
+- Written in Rust, shipped as one self-contained `.exe` for x64 and ARM64 (decision 0002). Nothing to install on the target machine.
 - Reports in English and French.
 
 ## Design decisions already taken
@@ -51,4 +51,5 @@ Technical correctness > system integrity > backup reliability > evidence > maint
 
 - Challenge the owner's assumptions when evidence points elsewhere; do not simply agree.
 - Owner prefers concise, copy-paste-ready scripts and fixes applied in batches.
-- Pester for tests, PSScriptAnalyzer for linting, GitHub Actions for CI, SemVer and a changelog for releases. Details are fixed in Stage 4.
+- `cargo test`, `cargo fmt`, `cargo clippy` (warnings as errors) and a dependency audit, GitHub Actions for CI, SemVer and a changelog for releases. Details are fixed in Stage 4.
+- The owner is learning Rust and cannot yet review it. Follow the conditions in decision 0002: check mode before any repair code, no `unsafe` outside one module, system calls behind a replaceable interface, and a plain-language explanation of the code and Rust concepts in every pull request.

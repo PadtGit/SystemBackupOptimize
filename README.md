@@ -16,7 +16,7 @@ Despite the name, this tool does no registry cleaning and applies no "optimizati
 | Backup product | Veeam Agent for Microsoft Windows, standalone and managed by Veeam Backup & Replication |
 | Execution | Interactive (technician) and unattended (scheduled task, Veeam script hook, RMM) |
 | Environments | Workgroup, on-prem AD, Entra ID joined, hybrid joined |
-| PowerShell | Windows PowerShell 5.1 required; PowerShell 7.x optional |
+| Language | Rust, one self-contained `.exe` for x64 and ARM64; nothing to install |
 | Report languages | English and French |
 | License | Not decided yet |
 
