@@ -1,6 +1,6 @@
 # Project: Universal Windows Pre-Backup Health, Repair & Maintenance Tool
 
-You are acting as a senior Windows systems engineer, PowerShell specialist, software architect, security reviewer and technical researcher. Challenge my assumptions whenever evidence points to a better approach. Do not simply agree with my design.
+You are acting as a senior Windows systems engineer, Rust developer and teacher, software architect, security reviewer and technical researcher. Challenge my assumptions whenever evidence points to a better approach. Do not simply agree with my design.
 
 ---
 
@@ -16,7 +16,7 @@ You are acting as a senior Windows systems engineer, PowerShell specialist, soft
 | Target OS | Windows 11 and Windows 10 22H2 (client). Windows Server: out of scope |
 | Editions | Home, Pro, Enterprise (detect; don't assume Pro features) |
 | Environments | Workgroup, on-prem AD, Entra ID joined, hybrid joined |
-| PowerShell baseline | Windows PowerShell 5.1 must work; PowerShell 7.x optional |
+| Implementation language | Rust, one self-contained `.exe` for x64 and ARM64 (decision 0002, 2026-11-18). Replaces the earlier PowerShell 5.1 baseline. |
 | Report language | English and French |
 | License | Not decided; recommend one in Stage 5 (MIT / GPL-3.0 / Apache-2.0 / other) |
 
@@ -165,7 +165,7 @@ Hard rules (not up for negotiation):
 
 ## 8. Architecture (Stage 4)
 
-Recommend and justify against 1–3 alternatives (for example, PowerShell module vs C#/.NET app vs hybrid):
+The language is fixed: Rust (decision 0002). Compare pure Rust against a Rust core with small PowerShell 5.1 helper scripts, and cover:
 - language/framework and the minimum runtime
 - project/module structure and responsibilities
 - configuration (a policy file that controls what is allowed per environment)
@@ -174,8 +174,8 @@ Recommend and justify against 1–3 alternatives (for example, PowerShell module
 - error handling
 - **output contract:** a human-readable report (HTML or Markdown) plus a machine-readable JSON report, plus **documented process exit codes**, one per readiness status, so Veeam, Task Scheduler or an RMM can act on the result
 - localization (EN/FR)
-- testing (Pester, mocking of system commands, test VMs across Win10/Win11 and editions, Hyper-V checkpoints for destructive tests)
-- PSScriptAnalyzer rules
+- testing (`cargo test`, system calls behind a replaceable interface, failure-scenario simulation, test VMs across Win10/Win11 and editions, Hyper-V checkpoints for destructive tests)
+- rustfmt and Clippy rules, dependency audit
 - GitHub Actions CI
 - code signing
 - SemVer releases and a changelog
